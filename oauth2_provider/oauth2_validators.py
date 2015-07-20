@@ -55,7 +55,7 @@ class OAuth2Validator(RequestValidator):
         if not auth_string:
             return False
         try:
-            encoding = request.encoding
+            encoding = request.encoding or 'utf-8'
         except AttributeError,e:
             encoding = 'utf-8'
 
