@@ -54,8 +54,10 @@ class OAuth2Validator(RequestValidator):
         auth_string = self._extract_basic_auth(request)
         if not auth_string:
             return False
-
-        encoding = request.encoding or 'utf-8'
+        try:
+            encoding = request.encoding
+        except AttributeError,e:
+            encoding = 'utf-8'
 
         try:
             b64_decoded = base64.b64decode(auth_string)
